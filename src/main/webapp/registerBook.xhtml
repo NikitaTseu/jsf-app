@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ 	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f = "http://java.sun.com/jsf/core">
+<h:head>
+	<title>Library</title>
+</h:head>
+<h:body>
+	<h:form>
+		<div>
+	  		<p:tabMenu activeIndex="#{param.i}">
+    			<p:menuitem value="Users" outcome="userList">
+        			<f:param name="i" value="0" />
+    			</p:menuitem>
+    			
+   				<p:menuitem value="Books" outcome="bookList">
+       				<f:param name="i" value="1" />
+    			</p:menuitem>
+    			
+    			<p:menuitem value="New book" outcome="registerBook">
+        			<f:param name="i" value="2" />
+    			</p:menuitem>
+    			
+			</p:tabMenu>
+	 	</div>
+	 	
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+	
+			<p:outputLabel for="isbn" value="isbn:" />
+			<p:inputMask id="isbn" required="true" requiredMessage="isbn is required" value="#{RegisterBookBean.isbn}" mask="99-9999-99"/>
+			<p:message for="isbn" closable="true"/>
+		
+			<p:outputLabel for="title" value="Title:" />
+			<p:inputText id="title" required="true" requiredMessage="Title is required" value="#{RegisterBookBean.title}" />
+			<p:message for="title" closable="true"/>
+			
+			<p:outputLabel for="author" value="Author:" />
+			<p:inputText id="author" required="true" requiredMessage="Author is required" value="#{RegisterBookBean.author}" />
+			<p:message for="author" closable="true"/>
+			
+			<p:outputLabel for="genre" value="Genre:" />
+			<p:inputText id="genre" required="true" requiredMessage="Genre is required" value="#{RegisterBookBean.genre}" />
+			<p:message for="genre" closable="true"/>
+		
+		</h:panelGrid>
+		<!-- <p:commandButton id="submitButton" value="Submit" action="#{RegisterBookBean.submit}" update="@form"/> -->
+		<p:commandButton id="submitButton" value="Submit" action="#{RegisterBookBean.submit}" update="@form">
+			<p:confirm header="Confirmation" message="Are you sure?"/>
+		</p:commandButton>
+		
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        	<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" />
+    	</p:confirmDialog>  
+			
+	</h:form>
+</h:body>
+</html>

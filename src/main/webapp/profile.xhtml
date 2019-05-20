@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f = "http://java.sun.com/jsf/core">
+<h:head>
+	<title>Library</title>
+</h:head>
+<h:body>
+	<h:form>
+		<div>
+	  		<p:tabMenu activeIndex="#{param.i}">
+    			<p:menuitem value="Users" outcome="userList">
+        			<f:param name="i" value="0" />
+    			</p:menuitem>
+    			
+   				<p:menuitem value="Books" outcome="bookList">
+       				<f:param name="i" value="1" />
+    			</p:menuitem>
+    			
+    			<p:menuitem value="New book" outcome="registerBook">
+        			<f:param name="i" value="2" />
+    			</p:menuitem>
+    			
+			</p:tabMenu>
+	 	</div>
+	 	
+	 	<br></br>
+
+	 	<div>
+            <p:panelGrid  columns="2" rendered="#{not empty UserTableBean.selectedUser}" columnClasses="label,value">
+                 
+                <h:outputText value="Id:" />
+                <h:outputText value="#{UserTableBean.selectedUser.id}" />
+ 
+               	<h:outputText value="Name" />
+                <h:outputText value="#{UserTableBean.selectedUser.name}" />
+ 
+                <h:outputText value="Surname:" />
+                <h:outputText value="#{UserTableBean.selectedUser.surname}" />
+             
+            </p:panelGrid>
+		</div>
+		
+		<br></br>
+		
+		<div>
+			
+			
+			
+		</div>
+	</h:form>
+</h:body>
+</html>
