@@ -7,11 +7,17 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "books")
+@NamedQueries({
+    @NamedQuery(name = "Book.findAll", query = "select b from Book b"),
+    @NamedQuery(name = "Book.maxId", query = "select MAX(b.id) from Book b")
+})
 @SuppressWarnings("serial")
 public class Book implements Serializable {
 	@Id
@@ -62,11 +68,11 @@ public class Book implements Serializable {
 		this.id = id;
 	}
 
-	public String getISBN() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setISBN(String isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 

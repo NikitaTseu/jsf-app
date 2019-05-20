@@ -5,9 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "requests")
@@ -17,10 +20,12 @@ public class Request implements Serializable{
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "user_id")
+	//@Column(name = "user_id")
+	@Transient
 	private int user_id;
 	
-	@Column(name = "book_id")
+	//@Column(name = "book_id")
+	@Transient
 	private int book_id;
 	
 	@Column(name = "date1")
@@ -29,10 +34,12 @@ public class Request implements Serializable{
 	@Column(name = "date2")
 	private Date date2;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "book_id", referencedColumnName = "id")
 	private Book book;
 
 	public Request(int id, int user_id, int book_id, Date date1, Date date2) {

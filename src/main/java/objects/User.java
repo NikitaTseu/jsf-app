@@ -7,11 +7,18 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+    @NamedQuery(name = "User.findAll", query = "select u from User u"),
+    @NamedQuery(name = "User.findByLogin", query = "select distinct u from User u where u.login = :loginParam"),
+    @NamedQuery(name = "User.maxId", query = "select MAX(u.id) from User u")
+})
 @SuppressWarnings("serial")
 public class User implements Serializable{
 	@Id
@@ -105,6 +112,28 @@ public class User implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (id != other.id)
+			return false;
+		return true;
 	}
 	
 }

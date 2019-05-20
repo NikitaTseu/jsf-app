@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Library</title>
+</h:head>
+<h:body>
+	<h:form>
+	 <div class="ui-message-error">
+	  	<span class="ui-message-error-icon"/>
+	  	<span class="ui-message-error-detail">Failed! Invalid username or password</span>
+	 </div>
+	
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+
+			<p:outputLabel for="login" value="Login:" />
+			<p:inputText id="login" required="true" requiredMessage="Login is required" value="#{LoginBean.login}" />
+			<p:message for="login" closable="true"/>
+		
+			<p:outputLabel for="password" value="Password:" />
+			<p:password id="password" required="true" requiredMessage="Password is required" value="#{LoginBean.pass}" />
+			<p:message for="password" closable="true"/>
+		
+		</h:panelGrid>
+		
+		<p:commandButton id="loginButton" value="Login" action="#{LoginBean.check}" update="@form"/>
+		<p:commandButton id="registerButton" value="Sign Up!" immediate="true" action="register" />
+		
+	</h:form>
+</h:body>
+</html>
