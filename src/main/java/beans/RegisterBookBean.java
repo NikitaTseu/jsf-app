@@ -31,7 +31,8 @@ public class RegisterBookBean {
 		genre = "";
 	}
 
-	public String submit() {
+	
+	public String doIt() {
 		book = new Book(service.generateNewId(), isbn, title, author, genre);
 		service.add(book);
 		refresh();

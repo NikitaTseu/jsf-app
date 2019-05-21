@@ -45,8 +45,8 @@
 			<p:message for="genre" closable="true"/>
 		
 		</h:panelGrid>
-		<!-- <p:commandButton id="submitButton" value="Submit" action="#{RegisterBookBean.submit}" update="@form"/> -->
-		<p:commandButton id="submitButton" value="Submit" action="#{RegisterBookBean.submit}" update="@form">
+		
+		<p:commandButton id="submitButton" value="Submit" action="#{RegisterBookBean.doIt}" update="@form">
 			<p:confirm header="Confirmation" message="Are you sure?"/>
 		</p:commandButton>
 		
