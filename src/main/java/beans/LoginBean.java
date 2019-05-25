@@ -1,6 +1,7 @@
 package beans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import objects.User;
@@ -17,6 +18,9 @@ public class LoginBean {
 	private String message="";
 	private String messageDetails="";
 	
+	@ManagedProperty("#{SessionBean}")
+	private SessionBean sessionBean;
+	
 	UserServiceI service = new UserService();
 	
 	public LoginBean() {}
@@ -24,10 +28,12 @@ public class LoginBean {
 	public void refresh() {
 		login = "";
 		pass = "";
+		sessionBean.setInvalidLoginFlag(0);
 	}
 	
 	public String register() {
 		refresh();
+		sessionBean.setUserRegisteredFlag(0);
 		return "register";
 	}
 	
@@ -35,10 +41,13 @@ public class LoginBean {
 		user = service.findByLogin(login);
 		if(user == null || !pass.equals(user.getPassword())) {
 			refresh();
-			return "login3";
+			sessionBean.setUserRegisteredFlag(0);
+			sessionBean.setInvalidLoginFlag(1);
+			return "login";
 		}
 		else {
 			refresh();
+			sessionBean.setUserRegisteredFlag(0);
 			if(user.getLibrn() == 1) {
 				return "startPageLibrn";
 			}
@@ -48,6 +57,13 @@ public class LoginBean {
 		}
 	}
 	
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
+	}
+
 	public String getLogin() {
 		return login;
 	}

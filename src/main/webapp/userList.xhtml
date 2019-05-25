@@ -27,9 +27,9 @@
 	 	</div>
 	 	
 	 	<div>
-	 		<p:dataTable var="user" value="#{UserTableBean.userList}" paginator="true" rows="10" rowKey="#{user.id}"
+	 		<p:dataTable var="user" value="#{UserTableBean.userList}" paginator="true" rows="20" rowKey="#{user.id}"
                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{UserTableBean.selectedUser}" id="userTable"
+                 rowsPerPageTemplate="10,20,30" selectionMode="single" selection="#{UserTableBean.selectedUser}" id="userTable"
                  emptyMessage="No users found with given criteria">
                  
         		<p:ajax event="rowSelect" listener="#{UserTableBean.onRowSelect}" update=":form:userDetail" oncomplete="PF('userDialog').show()" />

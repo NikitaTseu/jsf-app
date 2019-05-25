@@ -3,11 +3,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:p="http://primefaces.org/ui"
 	  xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
+	<h:head>
 	<title>Library</title>
 </h:head>
 <h:body>
 	<h:form>
+		<p:outputPanel rendered="#{SessionBean.invalidLoginFlag == 1}">
+			<div class="ui-message-error" >
+	  			<span class="ui-message-error-icon"/>
+	  			<span class="ui-message-error-detail">Failed! Invalid username or password</span>
+	 		</div>
+		</p:outputPanel>
+		 
+		<p:outputPanel rendered="#{SessionBean.userRegisteredFlag == 1}">
+			<div class="ui-message-info">
+	  			<span class="ui-message-info-icon"/>
+	  			<span class="ui-message-info-detail">Success! You have been registered in the system</span>
+	 		</div>
+		</p:outputPanel>
+		 
 		<h:panelGrid id="grid" columns="3" cellpadding="5">
 	
 			<p:outputLabel for="login" value="Login:" />

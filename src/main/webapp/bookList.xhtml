@@ -27,9 +27,9 @@
 	 	</div>
 	 	
 	 	<div>
-	 		<p:dataTable var="book" value="#{BookTableBean.bookList}" paginator="true" rows="10" rowKey="#{book.id}"
+	 		<p:dataTable var="book" value="#{BookTableBean.bookList}" paginator="true" rows="20" rowKey="#{book.id}"
                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{BookTableBean.selectedBook}" id="bookTable"
+                 rowsPerPageTemplate="10,20,30" selectionMode="single" selection="#{BookTableBean.selectedBook}" id="bookTable"
                  emptyMessage="No books found with given criteria">
                  
         		<p:ajax event="rowSelect" listener="#{BookTableBean.onRowSelect}" update=":form:bookDetail" oncomplete="PF('bookDialog').show()" />
@@ -77,9 +77,6 @@
                 	<h:outputText value="#{BookTableBean.selectedBook.genre}" />
              
             	</p:panelGrid>
-            	<br></br>
-            	
-            	<p:commandButton id="bookProfileButton" value="Profile" action="profile" />
         	</p:outputPanel>
     		</p:dialog>
 	 	</div>

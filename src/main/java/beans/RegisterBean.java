@@ -1,6 +1,7 @@
 package beans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import objects.User;
@@ -23,6 +24,9 @@ public class RegisterBean {
 	
 	UserServiceI service = new UserService();
 	
+	@ManagedProperty("#{SessionBean}")
+	private SessionBean sessionBean;
+	
 	public RegisterBean() {}
 	
 	public void refresh() {
@@ -36,13 +40,17 @@ public class RegisterBean {
 
 	public String submit() {
 		user = new User(service.generateNewId(), 0, name, surname, login, pass1);
+		sessionBean.setInvalidLoginFlag(0);
+		sessionBean.setUserRegisteredFlag(1);
 		service.add(user);
 		refresh();
-		return "login2";
+		return "login";
 	}
 	
 	public String cancel() {
 		refresh();
+		sessionBean.setUserRegisteredFlag(0);
+		sessionBean.setInvalidLoginFlag(0);
 		return "login";
 	}
 	
@@ -88,13 +96,18 @@ public class RegisterBean {
 		this.user = user;
 	}
 	
-
 	public String getMessage() {
 		return message;
 	}
-
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
 	}
 	
 }
