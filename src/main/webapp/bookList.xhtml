@@ -25,7 +25,7 @@
     			
 			</p:tabMenu>
 	 	</div>
-	 	
+       
 	 	<div>
 	 		<p:dataTable var="book" value="#{BookTableBean.bookList}" paginator="true" rows="20" rowKey="#{book.id}"
                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -56,6 +56,18 @@
     		</p:dataTable>
 	 	</div>
 	 	
+	 	<p:contextMenu for="bookTable">
+        	<p:menuitem value="View" update="bookDetail" icon="pi pi-search" oncomplete="PF('bookDialog').show()"/>
+        	<p:menuitem value="Delete" update="bookTable" icon="pi pi-times" action="#{BookTableBean.deleteBook}">
+        		<p:confirm header="Confirmation" message="Are you sure to delete this book?"/>
+        	</p:menuitem>
+    	</p:contextMenu>
+    	
+    	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+        	<p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" />
+    	</p:confirmDialog>  
+	 	
 	 	<div>
 	 		<p:dialog header="Book Detail" widgetVar="bookDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
         	<p:outputPanel id="bookDetail" style="text-align:center;">
@@ -80,6 +92,7 @@
         	</p:outputPanel>
     		</p:dialog>
 	 	</div>
+	 	
 	</h:form>
 </h:body>
 </html>

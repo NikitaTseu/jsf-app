@@ -19,16 +19,29 @@ import service.BookServiceI;
 @SessionScoped
 public class BookTableBean implements Serializable {
 	
+	private BookServiceI service = null;
 	private Book selectedBook = null;
 	private List<Book> bookList = new ArrayList<>();
 	
 	@PostConstruct
 	public void postConstruct () {
-		 BookServiceI service = new BookService();
-		 bookList = service.findAll();
+		 service = new BookService();
+		 refresh();
 	}
 
 	public void onRowSelect(SelectEvent event) {}
+	
+	public String deleteBook() {
+		if(selectedBook != null) {
+			service.delete(selectedBook);
+			refresh();
+		}
+		return "bookList";
+	}
+	
+	public void refresh() {
+		bookList = service.findAll();
+	}
 	
 	public Book getSelectedBook() {
 		return selectedBook;

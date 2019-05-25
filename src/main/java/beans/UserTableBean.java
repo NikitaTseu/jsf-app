@@ -27,6 +27,11 @@ public class UserTableBean implements Serializable {
 		 UserServiceI service = new UserService();
 		 userList = service.findAll();
 	}
+	
+	public String loadRqForSelectedUser() {
+		
+		return "profile";
+	}
 
 	public void onRowSelect(SelectEvent event) {}
 	

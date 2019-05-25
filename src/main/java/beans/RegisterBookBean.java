@@ -1,6 +1,7 @@
 package beans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import objects.Book;
@@ -32,10 +33,14 @@ public class RegisterBookBean {
 	}
 
 	
+	@ManagedProperty("#{BookTableBean}")
+	private BookTableBean tableBean;
+	
 	public String doIt() {
 		book = new Book(service.generateNewId(), isbn, title, author, genre);
 		service.add(book);
 		refresh();
+		tableBean.refresh();
 		return "registerBook";
 	}
 	
@@ -80,5 +85,15 @@ public class RegisterBookBean {
 	public void setBook(Book book) {
 		this.book = book;
 	}
+
+	public BookTableBean getTableBean() {
+		return tableBean;
+	}
+
+	public void setTableBean(BookTableBean tableBean) {
+		this.tableBean = tableBean;
+	}
+	
+	
 	
 }

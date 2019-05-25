@@ -49,7 +49,7 @@ public class LoginBean {
 			refresh();
 			sessionBean.setUserRegisteredFlag(0);
 			if(user.getLibrn() == 1) {
-				return "startPageLibrn";
+				return "userList";
 			}
 			else {
 				return "startPageUser";

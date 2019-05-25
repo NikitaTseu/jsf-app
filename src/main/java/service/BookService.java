@@ -31,4 +31,10 @@ public class BookService implements BookServiceI {
         em.getTransaction().commit();
 		return b;
 	}
+	
+	public void delete(Book b) {
+		em.getTransaction().begin();
+		em.remove(b);
+        em.getTransaction().commit();
+	}
 }

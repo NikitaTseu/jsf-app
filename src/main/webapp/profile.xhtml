@@ -46,10 +46,22 @@
 		<br></br>
 		
 		<div>
-			
-			
-			
-		</div>
+	 		<p:dataTable var="rq" value="#{UserTableBean.selectedUser.request}" paginator="true" rows="10" rowKey="#{rq.id}"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" id="rqTable"
+                 emptyMessage="No requests found with given criteria">
+        		
+        		<p:column headerText="Id" sortBy="#{rq.id}" filterBy="#{rq.id}">
+            		<h:outputText value="#{rq.id}" />
+        		</p:column>
+        		
+        		<p:column headerText="Book" sortBy="#{rq.book.title}" filterBy="#{pq.book.title}">
+           			<h:outputText value="#{rq.book.title}" />
+        		</p:column>
+        		
+        		
+    		</p:dataTable>
+	 	</div>
 	</h:form>
 </h:body>
 </html>
