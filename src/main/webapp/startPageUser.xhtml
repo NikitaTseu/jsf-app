@@ -6,18 +6,86 @@
 	  xmlns:f = "http://java.sun.com/jsf/core">
 <h:head>
 	<title>Library</title>
+	<style type="text/css">
+    	.expired {
+     	   background-color: #E88C8F !important;
+     	   background-image: none !important;
+     	   color: #000000 !important;
+    	}
+    	
+    	.closed {
+     	   background-color: #83C577 !important;
+     	   background-image: none !important;
+     	   color: #000000 !important;
+    	}
+    	
+    	.open {
+     	   background-color: #e6f0f2 !important;
+     	   background-image: none !important;
+     	   color: #000000 !important;
+    	}
+	</style>
 </h:head>
 <h:body>
-	<h:form>
+	<h:form id="form">
 		<div>
-	  		<p:tabMenu activeIndex="#{param.i}">
-    			
-   				<p:menuitem value="Books" outcome="bookList">
-       				<f:param name="i" value="0" />
-    			</p:menuitem>
-    			
-			</p:tabMenu>
+            <p:panelGrid  columns="2" rendered="#{not empty LoginBean.user}" columnClasses="label,value">
+                 
+                <h:outputText value="Id:" />
+                <h:outputText value="#{LoginBean.user.id}" />
+ 
+               	<h:outputText value="Name" />
+                <h:outputText value="#{LoginBean.user.name}" />
+ 
+                <h:outputText value="Surname:" />
+                <h:outputText value="#{LoginBean.user.surname}" />
+             
+            </p:panelGrid>
+		</div>
+		
+		<br></br>
+		
+		<div>
+	 		<p:dataTable var="rq" value="#{LoginBean.user.request}" paginator="true" rows="10" rowKey="#{rq.id}"  rowStyleClass="#{rq.status}"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="5,10,15" id="rqTable" emptyMessage="No requests found with given criteria">
+        		<f:facet name="header">
+        			List of requests	
+   				</f:facet>
+        		
+        		<p:column headerText="Request id" sortBy="#{rq.id}" filterBy="#{rq.id}">
+            		<h:outputText value="#{rq.id}" />
+        		</p:column>
+        		
+        		<p:column headerText="Book" sortBy="#{rq.book.title}" filterBy="#{pq.book.title}">
+           			<h:outputText value="#{rq.book.title}" />
+        		</p:column>
+        		
+        		<p:column headerText="Start date" sortBy="#{rq.date1}" filterBy="#{pq.date1}">
+           			<h:outputText value="#{rq.date1}" >
+           				<f:convertDateTime pattern="dd.MM.yyyy"/>
+           			</h:outputText>
+        		</p:column>
+        		
+        		<p:column headerText="Expired date" sortBy="#{rq.date2}" filterBy="#{pq.date2}">
+           			<h:outputText value="#{rq.date2}" >
+           				<f:convertDateTime pattern="dd.MM.yyyy"/>
+           			</h:outputText>
+        		</p:column>
+        		
+        		<p:column headerText="Status" sortBy="#{rq.status}" filterBy="#{rq.status}" filterMatchMode="exact">
+        			<f:facet name="filter">
+                		<p:selectOneMenu onchange="PF('rqTable').filter()" style="width:100%; box-sizing: border-box;" >
+                    		<f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                    		<f:selectItems value="#{RequestBean.status}" />
+                		</p:selectOneMenu>
+            		</f:facet>
+            		<h:outputText value="#{rq.status}" />
+        		</p:column>
+        		
+    		</p:dataTable>
 	 	</div>
+	
 	</h:form>
 </h:body>
 </html>

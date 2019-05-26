@@ -31,7 +31,11 @@
                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                  rowsPerPageTemplate="10,20,30" selectionMode="single" selection="#{BookTableBean.selectedBook}" id="bookTable"
                  emptyMessage="No books found with given criteria">
-                 
+                  
+                <f:facet name="header">
+        			Books	
+   				</f:facet>
+   				
         		<p:ajax event="rowSelect" listener="#{BookTableBean.onRowSelect}" update=":form:bookDetail" oncomplete="PF('bookDialog').show()" />
         		
         		<p:column headerText="Id" sortBy="#{book.id}" filterBy="#{book.id}">

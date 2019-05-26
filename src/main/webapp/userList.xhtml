@@ -32,6 +32,10 @@
                  rowsPerPageTemplate="10,20,30" selectionMode="single" selection="#{UserTableBean.selectedUser}" id="userTable"
                  emptyMessage="No users found with given criteria">
                  
+                <f:facet name="header">
+        			Users	
+   				</f:facet>
+   				
         		<p:ajax event="rowSelect" listener="#{UserTableBean.onRowSelect}" update=":form:userDetail" oncomplete="PF('userDialog').show()" />
         		
         		<p:column headerText="Id" sortBy="#{user.id}" filterBy="#{user.id}">

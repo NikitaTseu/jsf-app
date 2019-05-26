@@ -5,6 +5,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import objects.User;
+import service.RqService;
+import service.RqServiceI;
 import service.UserService;
 import service.UserServiceI;
 
@@ -22,6 +24,7 @@ public class LoginBean {
 	private SessionBean sessionBean;
 	
 	UserServiceI service = new UserService();
+	RqServiceI rqService = new RqService();
 	
 	public LoginBean() {}
 	
@@ -52,7 +55,8 @@ public class LoginBean {
 				return "userList?faces-redirect=true";
 			}
 			else {
-				return "startPageUser";
+				user.setRequest(rqService.findByUser(user.getId()));
+				return "startPageUser?faces-redirect=true";
 			}
 		}
 	}
