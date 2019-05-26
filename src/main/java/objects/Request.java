@@ -57,11 +57,12 @@ public class Request implements Serializable{
 	
 	private String status = "";
 
-	public Request(int id, int user_id, int book_id, Date date1, Date date2) {
+	public Request(int id, User user, Book book, Date date1, Date date2) {
 		super();
+		closed = 0;
 		this.id = id;
-		this.user_id = user_id;
-		this.book_id = book_id;
+		this.user = user;
+		this.book = book;
 		this.date1 = date1;
 		this.date2 = date2;
 	}

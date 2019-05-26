@@ -24,6 +24,14 @@
      	   background-image: none !important;
      	   color: #000000 !important;
     	}
+    	
+    	.col1 {
+     		width: 40%;
+		}
+
+		.col2 {
+     		width: availible;
+		}
 	</style>
 </h:head>
 <h:body>
@@ -48,19 +56,37 @@
 	 	<br></br>
 
 	 	<div>
-            <p:panelGrid  columns="2" rendered="#{not empty UserTableBean.selectedUser}" columnClasses="label,value">
-                 
-                <h:outputText value="Id:" />
-                <h:outputText value="#{UserTableBean.selectedUser.id}" />
+	 	<table style="width:60%" border="1">
+  			<tr>
+    		<td style="width:min-content">
+    		<p:panelGrid  columns="2" rendered="#{not empty UserTableBean.selectedUser}" columnClasses="col1, col2">
+                
+                <p:panelGrid  columns="2" columnClasses="label,value">
+                	<h:outputText value="Id:" />
+               		<h:outputText value="#{UserTableBean.selectedUser.id}" />
  
-               	<h:outputText value="Name" />
-                <h:outputText value="#{UserTableBean.selectedUser.name}" />
+               		<h:outputText value="Name" />
+                	<h:outputText value="#{UserTableBean.selectedUser.name}" />
  
-                <h:outputText value="Surname:" />
-                <h:outputText value="#{UserTableBean.selectedUser.surname}" />
-             
+                	<h:outputText value="Surname:" />
+                	<h:outputText value="#{UserTableBean.selectedUser.surname}" />
+                </p:panelGrid>
+                
+                
             </p:panelGrid>
+            </td>
+            
+            <td style="width:available" align="center">
+            	<p:outputLabel for="nbId" value="Book ID:" />
+				<p:inputText id="nbId" value="#{RequestBean.bookId}" />
+				
+            	<p:commandButton id="addButton" value="Add" action="#{RequestBean.newRequest}" update="@form"/>
+            </td>
+  			</tr>
+		</table>
 		</div>
+		
+		<p:growl id="messageBox" showDetail="true"/> 
 		
 		<br></br>
 		

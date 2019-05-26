@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @Table(name = "books")
 @NamedQueries({
     @NamedQuery(name = "Book.findAll", query = "select b from Book b"),
+    @NamedQuery(name = "Book.findById", query = "select distinct b from Book b where b.id = :idParam"),
     @NamedQuery(name = "Book.maxId", query = "select MAX(b.id) from Book b")
 })
 @SuppressWarnings("serial")

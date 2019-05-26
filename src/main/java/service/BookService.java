@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
@@ -23,6 +24,17 @@ public class BookService implements BookServiceI {
 	public int generateNewId() {
 		TypedQuery<Integer> q = em.createNamedQuery("Book.maxId", Integer.class);
 		return q.getSingleResult() + 1;
+	}
+	
+	public Book findById(int id) {
+		Book book = null;
+		try {
+	        TypedQuery<Book> query = em.createNamedQuery("Book.findById", Book.class);
+	        query.setParameter("idParam", id);
+	        book = query.getSingleResult();
+		}
+		catch(NoResultException e) {}
+        return book;
 	}
 	
 	public Book add(Book b) {
