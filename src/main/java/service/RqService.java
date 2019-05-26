@@ -34,6 +34,16 @@ public class RqService implements RqServiceI {
 		return r;
 	}
 	
+	public Request updateClosedStatus(Request r) {
+		if(r.getClosed() == 0) {
+			r.setClosed(1);
+			em.getTransaction().begin();
+			em.merge(r);
+	        em.getTransaction().commit();
+		}
+		return r;
+	}
+	
 	public List<Request> findByUser(int user_id) {
 		List<Request> rq = new ArrayList<>();
 		try {

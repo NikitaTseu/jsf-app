@@ -8,5 +8,6 @@ public interface RqServiceI {
 	public List<Request> findAll();
 	public int generateNewId();
 	public Request add(Request r);
+	public Request updateClosedStatus(Request r);
 	public List<Request> findByUser(int user_id);
 }

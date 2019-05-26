@@ -8,13 +8,13 @@
 	<title>Library</title>
 	<style type="text/css">
     	.expired {
-     	   background-color: #fca752 !important;
+     	   background-color: #E88C8F !important;
      	   background-image: none !important;
      	   color: #000000 !important;
     	}
     	
     	.closed {
-     	   background-color: #47db21 !important;
+     	   background-color: #83C577 !important;
      	   background-image: none !important;
      	   color: #000000 !important;
     	}
@@ -27,7 +27,7 @@
 	</style>
 </h:head>
 <h:body>
-	<h:form>
+	<h:form id="form">
 		<div>
 	  		<p:tabMenu activeIndex="#{param.i}">
     			<p:menuitem value="Users" outcome="userList?faces-redirect=true">
@@ -65,11 +65,13 @@
 		<br></br>
 		
 		<div>
-		<h:form>
 	 		<p:dataTable var="rq" value="#{UserTableBean.selectedUser.request}" paginator="true" rows="10" rowKey="#{rq.id}"  rowStyleClass="#{rq.status}"
                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                 rowsPerPageTemplate="5,10,15" selectionMode="single" id="rqTable" emptyMessage="No requests found with given criteria">
-        		
+                 rowsPerPageTemplate="5,10,15" selection="#{RequestBean.selectedRq}" id="rqTable" widgetVar="rqTable" emptyMessage="No requests found with given criteria">
+        		<f:facet name="header">
+        			List of requests	
+   				</f:facet>
+   				
         		<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
         		
         		<p:column headerText="Request id" sortBy="#{rq.id}" filterBy="#{rq.id}">
@@ -80,16 +82,40 @@
            			<h:outputText value="#{rq.book.title}" />
         		</p:column>
         		
+        		<p:column headerText="Start date" sortBy="#{rq.date1}" filterBy="#{pq.date1}">
+           			<h:outputText value="#{rq.date1}" >
+           				<f:convertDateTime pattern="dd.MM.yyyy"/>
+           			</h:outputText>
+        		</p:column>
+        		
+        		<p:column headerText="Expired date" sortBy="#{rq.date2}" filterBy="#{pq.date2}">
+           			<h:outputText value="#{rq.date2}" >
+           				<f:convertDateTime pattern="dd.MM.yyyy"/>
+           			</h:outputText>
+        		</p:column>
+        		
         		<p:column headerText="Date" sortBy="#{rq.date1}" filterBy="#{pq.date1}">
            			<h:outputText value="#{rq.date1}" >
            				<f:convertDateTime pattern="dd.MM.yyyy"/>
            			</h:outputText>
         		</p:column>
         		
+        		<p:column headerText="Status" sortBy="#{rq.status}" filterBy="#{rq.status}" filterMatchMode="exact">
+        			<f:facet name="filter">
+                		<p:selectOneMenu onchange="PF('rqTable').filter()" style="width:100%; box-sizing: border-box;" >
+                    		<f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                    		<f:selectItems value="#{RequestBean.status}" />
+                		</p:selectOneMenu>
+            		</f:facet>
+            		<h:outputText value="#{rq.status}" />
+        		</p:column>
         		
+        		<f:facet name="footer">
+        			<p:commandButton id="closeRqButton" value="Close selected requests" action="#{RequestBean.closeSelected}" update="@form"/>	
+   				</f:facet>
     		</p:dataTable>
-    	</h:form>
 	 	</div>
+	
 	</h:form>
 </h:body>
 </html>

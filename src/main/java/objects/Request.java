@@ -56,6 +56,7 @@ public class Request implements Serializable{
 	private Book book;
 	
 	private String status = "";
+	private String selection = "";
 
 	public Request(int id, int user_id, int book_id, Date date1, Date date2) {
 		super();
@@ -157,5 +158,20 @@ public class Request implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public String getSelection() {
+		if(closed == 1) {
+			selection = "true";
+		}
+		else {
+			selection = "false";
+		}
+		return selection;
+	}
+
+	public void setSelection(String selection) {
+		this.selection = selection;
+	}
+	
 	
 }
