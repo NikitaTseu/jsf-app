@@ -1,6 +1,7 @@
 package objects;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.apache.commons.lang.time.DateUtils;
 
 @Entity
 @Table(name = "requests")
@@ -51,6 +54,8 @@ public class Request implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "book_id", referencedColumnName = "id")
 	private Book book;
+	
+	private String status = "";
 
 	public Request(int id, int user_id, int book_id, Date date1, Date date2) {
 		super();
@@ -129,6 +134,28 @@ public class Request implements Serializable{
 	}
 	public void setClosed(int closed) {
 		this.closed = closed;
+	}
+
+	public String getStatus() {
+		if(closed == 1) {
+			status = "closed";
+		}
+		else {
+			Date now = new Date();
+			now = DateUtils.round(now, Calendar.DAY_OF_MONTH);
+			Date d2 = DateUtils.round(date2, Calendar.DAY_OF_MONTH);
+			if(d2.before(now)) {
+				return "expired";
+			}
+			else {
+				return "open";
+			}
+		}
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

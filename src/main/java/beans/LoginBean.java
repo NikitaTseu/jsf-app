@@ -34,7 +34,7 @@ public class LoginBean {
 	public String register() {
 		refresh();
 		sessionBean.setUserRegisteredFlag(0);
-		return "register";
+		return "register?faces-redirect=true";
 	}
 	
 	public String check() {
@@ -43,13 +43,13 @@ public class LoginBean {
 			refresh();
 			sessionBean.setUserRegisteredFlag(0);
 			sessionBean.setInvalidLoginFlag(1);
-			return "login";
+			return "login?faces-redirect=true";
 		}
 		else {
 			refresh();
 			sessionBean.setUserRegisteredFlag(0);
 			if(user.getLibrn() == 1) {
-				return "userList";
+				return "userList?faces-redirect=true";
 			}
 			else {
 				return "startPageUser";

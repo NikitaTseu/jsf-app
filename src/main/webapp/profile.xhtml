@@ -6,20 +6,39 @@
 	  xmlns:f = "http://java.sun.com/jsf/core">
 <h:head>
 	<title>Library</title>
+	<style type="text/css">
+    	.expired {
+     	   background-color: #fca752 !important;
+     	   background-image: none !important;
+     	   color: #000000 !important;
+    	}
+    	
+    	.closed {
+     	   background-color: #47db21 !important;
+     	   background-image: none !important;
+     	   color: #000000 !important;
+    	}
+    	
+    	.open {
+     	   background-color: #e6f0f2 !important;
+     	   background-image: none !important;
+     	   color: #000000 !important;
+    	}
+	</style>
 </h:head>
 <h:body>
 	<h:form>
 		<div>
 	  		<p:tabMenu activeIndex="#{param.i}">
-    			<p:menuitem value="Users" outcome="userList">
+    			<p:menuitem value="Users" outcome="userList?faces-redirect=true">
         			<f:param name="i" value="0" />
     			</p:menuitem>
     			
-   				<p:menuitem value="Books" outcome="bookList">
+   				<p:menuitem value="Books" outcome="bookList?faces-redirect=true">
        				<f:param name="i" value="1" />
     			</p:menuitem>
     			
-    			<p:menuitem value="New book" outcome="registerBook">
+    			<p:menuitem value="New book" outcome="registerBook?faces-redirect=true">
         			<f:param name="i" value="2" />
     			</p:menuitem>
     			
@@ -46,12 +65,14 @@
 		<br></br>
 		
 		<div>
-	 		<p:dataTable var="rq" value="#{UserTableBean.selectedUser.request}" paginator="true" rows="10" rowKey="#{rq.id}"
+		<h:form>
+	 		<p:dataTable var="rq" value="#{UserTableBean.selectedUser.request}" paginator="true" rows="10" rowKey="#{rq.id}"  rowStyleClass="#{rq.status}"
                  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                 rowsPerPageTemplate="5,10,15" selectionMode="single" id="rqTable"
-                 emptyMessage="No requests found with given criteria">
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" id="rqTable" emptyMessage="No requests found with given criteria">
         		
-        		<p:column headerText="Id" sortBy="#{rq.id}" filterBy="#{rq.id}">
+        		<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+        		
+        		<p:column headerText="Request id" sortBy="#{rq.id}" filterBy="#{rq.id}">
             		<h:outputText value="#{rq.id}" />
         		</p:column>
         		
@@ -59,8 +80,15 @@
            			<h:outputText value="#{rq.book.title}" />
         		</p:column>
         		
+        		<p:column headerText="Date" sortBy="#{rq.date1}" filterBy="#{pq.date1}">
+           			<h:outputText value="#{rq.date1}" >
+           				<f:convertDateTime pattern="dd.MM.yyyy"/>
+           			</h:outputText>
+        		</p:column>
+        		
         		
     		</p:dataTable>
+    	</h:form>
 	 	</div>
 	</h:form>
 </h:body>

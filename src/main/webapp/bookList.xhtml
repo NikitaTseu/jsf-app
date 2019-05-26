@@ -11,15 +11,15 @@
 	<h:form id="form">
 		<div>
 	  		<p:tabMenu activeIndex="#{param.i}">
-    			<p:menuitem value="Users" outcome="userList">
+    			<p:menuitem value="Users" outcome="userList?faces-redirect=true">
         			<f:param name="i" value="0" />
     			</p:menuitem>
     			
-   				<p:menuitem value="Books" outcome="bookList">
+   				<p:menuitem value="Books" outcome="bookList?faces-redirect=true">
        				<f:param name="i" value="1" />
     			</p:menuitem>
     			
-    			<p:menuitem value="New book" outcome="registerBook">
+    			<p:menuitem value="New book" outcome="registerBook?faces-redirect=true">
         			<f:param name="i" value="2" />
     			</p:menuitem>
     			

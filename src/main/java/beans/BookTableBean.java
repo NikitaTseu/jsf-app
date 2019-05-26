@@ -36,7 +36,7 @@ public class BookTableBean implements Serializable {
 			service.delete(selectedBook);
 			refresh();
 		}
-		return "bookList";
+		return "bookList?faces-redirect=true";
 	}
 	
 	public void refresh() {

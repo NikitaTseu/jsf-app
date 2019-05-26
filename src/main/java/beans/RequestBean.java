@@ -34,8 +34,7 @@ public class RequestBean implements Serializable {
 	public String loadRqForSelectedUser() {
 		int uid = utb.getSelectedUser().getId();
 		utb.getSelectedUser().setRequest(service.findByUser(uid));
-		//utb.getSelectedUser().setRequest(service.findAll());
-		return "profile";
+		return "profile?faces-redirect=true";
 	}
 
 	public UserTableBean getUtb() {

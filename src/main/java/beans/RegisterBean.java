@@ -44,14 +44,14 @@ public class RegisterBean {
 		sessionBean.setUserRegisteredFlag(1);
 		service.add(user);
 		refresh();
-		return "login";
+		return "login?faces-redirect=true";
 	}
 	
 	public String cancel() {
 		refresh();
 		sessionBean.setUserRegisteredFlag(0);
 		sessionBean.setInvalidLoginFlag(0);
-		return "login";
+		return "login?faces-redirect=true";
 	}
 	
 	public int getId() {
