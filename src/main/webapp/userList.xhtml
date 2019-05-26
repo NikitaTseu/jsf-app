@@ -52,27 +52,10 @@
     		</p:dataTable>
 	 	</div>
 	 	
-	 	<div>
-	 		<p:dialog header="User Detail" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-        	<p:outputPanel id="userDetail" style="text-align:center;">
-            	<p:panelGrid  columns="2" rendered="#{not empty UserTableBean.selectedUser}" columnClasses="label,value">
-                 
-                	<h:outputText value="Id:" />
-                	<h:outputText value="#{UserTableBean.selectedUser.id}" />
- 
-               		<h:outputText value="Name" />
-                	<h:outputText value="#{UserTableBean.selectedUser.name}" />
- 
-                	<h:outputText value="Surname:" />
-                	<h:outputText value="#{UserTableBean.selectedUser.surname}" />
-             
-            	</p:panelGrid>
-            	<br></br>
-            	
-            	<p:commandButton id="userProfileButton" value="Profile" action="#{RequestBean.loadRqForSelectedUser}" />
-        	</p:outputPanel>
-    		</p:dialog>
-	 	</div>
+	 	<p:contextMenu for="userTable">
+        	<p:menuitem value="Profile" icon="pi pi-search" action="#{RequestBean.loadRqForSelectedUser}"/>
+    	</p:contextMenu>
+	 	
 	</h:form>
 </h:body>
 </html>
