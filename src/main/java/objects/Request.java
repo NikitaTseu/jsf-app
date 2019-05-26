@@ -56,7 +56,6 @@ public class Request implements Serializable{
 	private Book book;
 	
 	private String status = "";
-	private String selection = "";
 
 	public Request(int id, int user_id, int book_id, Date date1, Date date2) {
 		super();
@@ -74,6 +73,15 @@ public class Request implements Serializable{
 		this.book_id = 0;
 		this.date1 = null;
 		this.date2 = null;
+	}
+	
+	public void prolong() {
+		Date d2 = DateUtils.round(date2, Calendar.DAY_OF_MONTH);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(d2);
+		cal.add(Calendar.DAY_OF_MONTH, 14);
+		date2 = cal.getTime();
+		status = getStatus();
 	}
 	
 	public String toString() {
@@ -159,19 +167,4 @@ public class Request implements Serializable{
 		this.status = status;
 	}
 
-	public String getSelection() {
-		if(closed == 1) {
-			selection = "true";
-		}
-		else {
-			selection = "false";
-		}
-		return selection;
-	}
-
-	public void setSelection(String selection) {
-		this.selection = selection;
-	}
-	
-	
 }

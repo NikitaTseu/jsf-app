@@ -42,8 +42,16 @@ public class RequestBean implements Serializable {
 	}
 	
 	public String closeSelected() {
-		for(int i=0;i<selectedRq.size();i++) {
+		for(int i = 0; i < selectedRq.size(); i++) {
 			service.updateClosedStatus(selectedRq.get(i));
+		}
+		selectedRq = new ArrayList<>();
+		return "profile?faces-redirect=true";
+	}
+	
+	public String prolongSelected() {
+		for(int i = 0; i < selectedRq.size(); i++) {
+			service.prolong(selectedRq.get(i));
 		}
 		selectedRq = new ArrayList<>();
 		return "profile?faces-redirect=true";

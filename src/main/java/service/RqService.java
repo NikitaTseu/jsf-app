@@ -44,6 +44,14 @@ public class RqService implements RqServiceI {
 		return r;
 	}
 	
+	public Request prolong(Request r) {
+		r.prolong();
+		em.getTransaction().begin();
+		em.merge(r);
+	    em.getTransaction().commit();
+		return r;
+	}
+	
 	public List<Request> findByUser(int user_id) {
 		List<Request> rq = new ArrayList<>();
 		try {

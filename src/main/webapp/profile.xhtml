@@ -94,12 +94,6 @@
            			</h:outputText>
         		</p:column>
         		
-        		<p:column headerText="Date" sortBy="#{rq.date1}" filterBy="#{pq.date1}">
-           			<h:outputText value="#{rq.date1}" >
-           				<f:convertDateTime pattern="dd.MM.yyyy"/>
-           			</h:outputText>
-        		</p:column>
-        		
         		<p:column headerText="Status" sortBy="#{rq.status}" filterBy="#{rq.status}" filterMatchMode="exact">
         			<f:facet name="filter">
                 		<p:selectOneMenu onchange="PF('rqTable').filter()" style="width:100%; box-sizing: border-box;" >
@@ -111,7 +105,8 @@
         		</p:column>
         		
         		<f:facet name="footer">
-        			<p:commandButton id="closeRqButton" value="Close selected requests" action="#{RequestBean.closeSelected}" update="@form"/>	
+        			<p:commandButton id="closeRqButton" value="Close selected requests" action="#{RequestBean.closeSelected}" update="@form"/>
+        			<p:commandButton id="prolongRqButton" value="Prolong selected requests" action="#{RequestBean.prolongSelected}" update="@form"/>	
    				</f:facet>
     		</p:dataTable>
 	 	</div>
